@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Jslet - Convert Display In Server Side</title>
+    <link rel="stylesheet" type="text/css" href="../css/demo-style.css" />
+    <script type="text/javascript" src="../../loader/jslet.loader.js"></script>
+    <script type="text/javascript">
+        jslet.require("jslet", function () {
+            initialize();
+        });
+
+        function initialize() {
+            //Create Dataset
+            var dsPaymentTerm = jslet.data.createEnumDataset("dsPaymentTerm", "01-T/T;02-D/P;03-L/C");
+            var dsCustomer = jslet.data.createEnumDataset("dsCustomer", "01-IBM;02-Microsoft;03-Oracle");
+
+            var dsSaleMaster = new jslet.data.Dataset("dsSaleMaster");
+
+            var f = jslet.data.createStringField("saleid", 10);
+            f.label("Sales Order#");
+            dsSaleMaster.addField(f);
+
+            f = jslet.data.createDateField("saledate");
+            f.displayFormat("yyyy-MM-dd");
+            f.label("Sale Date");
+            dsSaleMaster.addField(f);
+
+            f = jslet.data.createStringField("customer", 20);
+            f.label("Customer");
+            var lkFld = new jslet.data.LookupField();
+            lkFld.lookupDataset(dsCustomer);
+            f.lookupField(lkFld);
+            dsSaleMaster.addField(f);
+
+            f = jslet.data.createStringField("paymentterm", 10);
+            f.label("Payment Term");
+            f.displayWidth(20);
+            lkFld = new jslet.data.LookupField();
+            lkFld.lookupDataset(dsPaymentTerm);
+            f.lookupField(lkFld);
+
+            dsSaleMaster.addField(f);
+
+            f = jslet.data.createStringField("comment", 50);
+            f.label("Comment");
+            f.displayWidth(30);
+            dsSaleMaster.addField(f);
+
+            var dsSaleDetail = new jslet.data.Dataset("dsSaleDetail");
+            f = jslet.data.createNumberField("seqno");
+            f.label("Number#");
+            dsSaleDetail.addField(f);
+
+            f = jslet.data.createStringField("product", 20);
+            f.label("Product");
+			
+//Important: the following 3 settings are required.
+            f.clientTranslate(false);
+            f.inputValueField("product_code");
+            f.displayValueField("product_name");
+
+            dsSaleDetail.addField(f);
+
+            f = jslet.data.createNumberField("num", 8);
+            f.label("Quantity");
+            f.displayFormat("#,##0");
+            dsSaleDetail.addField(f);
+
+            f = jslet.data.createNumberField("price", 16, 2);
+            f.label("Price");
+            f.displayFormat("#,##0.00");
+            dsSaleDetail.addField(f);
+
+            f = jslet.data.createNumberField("amount", 16, 2);
+            f.label("Amount");
+            f.formula("[num]*[price]");
+            f.displayFormat("#,##0.00");
+            f.unitConverted(false);
+            dsSaleDetail.addField(f);
+
+            f = jslet.data.createDatasetField("details", dsSaleDetail);
+            dsSaleMaster.addField(f);
+
+
+            //Add detail data
+            var detail1 = [{ "seqno": 1, "product": "6", "product_code": "601", "product_name": "601-Computer", "num": 2000, "price": 11.5 },
+		{ "seqno": 2, "product": "1", "product_code": "101", "product_name": "101-Car", "num": 1000, "price": 11.5 },
+		{ "seqno": 3, "product": "2", "product_code": "201", "product_name": "201-Monitor", "num": 3000, "price": 11.5 },
+		{ "seqno": 4, "product": "3", "product_code": "301", "product_name": "301-Keyboard", "num": 5000, "price": 11.5 },
+		{ "seqno": 5, "product": "4", "product_code": "401", "product_name": "401-Mouse", "num": 8000, "price": 11.5}];
+
+            var detail2 = [{ "seqno": 1, "product": "3", "product_code": "301", "product_name": "301-Keyboard", "num": 1, "price": 10001 },
+		{ "seqno": 2, "product": "1", "product_code": "201", "product_name": "201-Monitor", "num": 2, "price": 30000}];
+			//Add master data
+            var dataList = [{ "saleid": "200901001", "saledate": new Date(2001, 1, 1), "customer": "02", "paymentterm": "02", "comment": "It's OK", "details": detail1 },
+		{ "saleid": "200901002", "saledate": new Date(2001, 1, 1), "customer": "01", "paymentterm": "01", "comment": "", "details": detail2 },
+		{ "saleid": "200901003", "saledate": new Date(2001, 1, 1), "customer": "02", "paymentterm": "02", "comment": ""}];
+            dsSaleMaster.dataList(dataList);
+
+            function doTranslateProduct(dataset, fieldName, inputValue) {
+                /*Send translation request to server
+                var result = null;
+                new Ajax.Request(url, {method:"post",asynchronous:false,parameters:params,
+					onSuccess: function(transport) { result = transport.responseText.evalJSON(true);},
+					onFailure: function(transport){}		
+                });
+                return result; //result format: {keyValue:xxx, displayValue: "xxxx", inputValue: "xxx"}
+				*/
+				//In this sample, we don't have serer side, so we return back a const value simply.
+                return { keyValue: '7', displayValue: '007-test', inputValue: "007" };
+            }
+            dsSaleDetail.translateListener(doTranslateProduct);
+        }
+    </script>
+</head>
+<body onunload="jslet.ui.uninstall()">
+    <h2>Jslet - Convert Display In Server Side</h2>
+    <hr />
+    <p>In this sample, field "product" of sales detail dataset is translated in server side, cause the product dataset is very large.</p>
+    <p>Sales Master List:</p>
+    <div data-jslet='type:"DBTable",dataset:"dsSaleMaster"' style="width: 800px;height: 130px">
+    </div>
+    <hr />
+    <p>Sales Detail List:</p>
+    <div data-jslet='type:"DBTable",dataset:"dsSaleDetail"' style="width: 800px;height: 180px">
+    </div>
+    <hr />
+    <h3>Demo Content:</h3>
+    <p>There are three fiels: product, product_code, product_name in Sales detail dataset which are correspoding to product id, product code and product name<br />
+	  When user inputs value product code in editor, it will send a request to server side to get product id and product name.</p>
+
+    <p>
+        1. Editor:
+    <label data-jslet='type:"DBLabel",dataset:"dsSaleDetail",field:"product"'>
+    </label>:
+	<input type="text" data-jslet='type:"DBText",dataset:"dsSaleDetail",field:"product"' /></p>
+
+	<!-- Source Code -->
+	<script type="text/javascript" src="../source/demosource.js?height=630"></script>
+</body>
+</html>

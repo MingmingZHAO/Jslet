@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Jslet - Field Chain</title>
+    <link rel="stylesheet" type="text/css" href="../css/demo-style.css" />
+    <script type="text/javascript" src="../../loader/jslet.loader.js"></script>
+    <script type="text/javascript">
+        jslet.define("employee", "../js/employee.js");
+        jslet.require("jslet,employee");
+     </script>
+</head>
+<body onunload="jslet.ui.uninstall()">
+    <h2>
+        Jslet - Field Chain</h2>
+    <hr />
+    <p><a href="EmployeeDataModel.htm">Data Model</a></p>
+    <table>
+        <tr>
+            <td>
+                <p>
+                    Employee List:</p>
+                <div data-jslet='type:"DBTable",dataset:"employee"' style="width: 700px; height: 200px">
+                </div>
+            </td>
+            <td>
+                <p>
+                    Department List:</p>
+                <div data-jslet='type:"DBTable",dataset:"department"' style="width: 300px; height: 200px">
+                </div>
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <h3>Demo Content:</h3>
+    <p>
+        1. Get Value:</p>
+       &nbsp;&nbsp;&nbsp; Get department address:<input type="text" id="value1" value="department.address" size="20" /><input
+            type="button" value=" Get Value " onclick="$('#result1')[0].value = dsEmployee.fieldValue($('#value1').val());" /><input
+                id="result1" size="20" name="T1" />
+    <p>
+        2. Find first employee by expression that contains field chain: </p>
+    <p>
+        &nbsp;&nbsp;&nbsp; Find employee by condition: department in Beijing:<input type="text" id="condition1" value="[department.address]=='Beijing'"
+            size="32"><input type="button" value=" Search " onclick="dsEmployee.find($('#condition1').val());" />
+    </p>
+    <p>
+        3. Filter data by expression that contains field chain: <br />
+        <b>&nbsp;&nbsp;&nbsp; </b>Filter out all employee whose department is in Beijing: <input type="text" id="condition2" value="[department.address]=='Beijing'"
+            size="32" /><input type="button" value=" Filter " onclick="dsEmployee.filter($('#condition2').val());dsEmployee.filtered(true)" /><input
+                type="button" value=" Display All " onclick="dsEmployee.filtered(false)" />
+    </p>
+    <p>
+        4. Sort by field chain: <br />
+        &nbsp;&nbsp;&nbsp; Sort by department.address(Asceding): <input type="text" id="value2" value="department.address"
+            size="28" name="T3" /><input type="button" value=" Sort " onclick="dsEmployee.indexFields($('#value2').val());" /><br />
+        &nbsp;&nbsp;&nbsp; Sort by department.address(Descending): <input type="text" id="value3" value="department.address desc"
+            size="28" name="T4" /><input type="button" value=" Sort " onclick="dsEmployee.indexFields($('#value3').val());" />
+    </p>
+	
+	<!-- Source Code -->
+	<script type="text/javascript" src="../source/demosource.js?height=430"></script>
+</body>
+</html>

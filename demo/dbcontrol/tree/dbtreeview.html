@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jslet - DBTreeView Demo</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+        .folderIcon
+        {
+            background-image:url("../../images/folder.gif");
+            background-repeat:no-repeat;
+            background-position:center;
+        }
+        
+        .fileIcon
+        {
+            background-image:url("../../images/file.gif");
+            background-repeat:no-repeat;
+            background-position:center;
+        }
+        
+        .dynset1
+        {
+            background-image:url("../../images/dynset1.png");
+            background-repeat:no-repeat;
+            background-position:center;
+        }
+        
+        .dynset2
+        {
+            background-image:url("../../images/dynset2.png");
+            background-repeat:no-repeat;
+            background-position:center;
+        }
+        
+    </style>
+    <link rel="stylesheet" type="text/css" href="../../css/demo-style.css" />
+    <script type="text/javascript" src="../../../loader/jslet.loader.js"></script>
+    <script type="text/javascript">
+        jslet.require("jslet",initialize);
+
+        function initialize() {
+            dsAgency = new jslet.data.Dataset("dsAgency");
+            var f = jslet.data.createNumberField("id", 10);
+            f.label("ID");
+            dsAgency.addField(f);
+
+            f = jslet.data.createNumberField("parentid", 10);
+            f.label("ParentID");
+            dsAgency.addField(f);
+
+            f = jslet.data.createStringField("code", 10);
+            f.label("Code");
+            dsAgency.addField(f);
+
+            f = jslet.data.createStringField("name", 10);
+            f.label("Name");
+            dsAgency.addField(f);
+
+            f = jslet.data.createStringField("iconcls", 10);
+            f.label("Icon Style Class");
+            dsAgency.addField(f);
+
+            dsAgency.keyField("id");
+            dsAgency.codeField("code");
+            dsAgency.nameField("name");
+			dsAgency.levelField("levelno");
+			dsAgency.parentField("parentid");
+
+            dsAgency.dataList(generateLargeData());
+
+			//Global variable for #trvRegion 
+            treeCfg = { type: "DBTreeView", 
+			    dataset: "dsAgency", 
+				"displayFields": "[code]+'-'+[name]",
+                "keyField": "id", 
+				"parentField": "parentid",
+                "hasCheckbox": true, 
+				"iconClassField": "iconcls", 
+				onCreateContextMenu: doCreateContextMenu, 
+				relativeCheck: true
+            };
+
+			//Global variable for below event handler
+            treeTag = document.getElementById("trvRegion");
+        }
+
+        function doDblClick() {
+            alert('Double Click Event!');
+        }
+
+        function doGetIconClass(keyValue, level, isLeaf) {
+            return isLeaf ? "dynset2" : "dynset1";
+        }
+		
+        //Add your menu item
+        function doCreateContextMenu(menuItems) {
+            menuItems.push({ name: "-" });
+            menuItems.push({ id: "customMenu", name: "Customized Menu", onclick: function () { alert('Customized Menu clicked!'); } });
+        }
+
+		function getRandomChar(){
+			return String.fromCharCode(65 + Math.round(Math.random()*25));
+		}
+		
+		//Create large test data: 2000 records 
+		function generateLargeData(){
+			var data = [], rec, code1, code2, m=1, id1, id2;
+			for(var i = 1; i <= 200; i++){
+				code1 = i;
+				if(i < 10)
+					code1 ='00' + i;
+				else
+				if(i < 100)
+					code1 = '0' + i;
+				else
+					code1 = i;
+				
+				id1 = m++;
+				rec = {id: id1, code: code1, name: getRandomChar() + code1, levelno: 0};
+				data.push(rec);
+				for(var j = 1; j < 11; j++){
+					code2 = code1+ (j < 10 ? '0': '')+j;
+					id2 = m++;
+					rec = {id: id2, code: code2, name: getRandomChar() + code2, parentid: id1, levelno: 1};
+					data.push(rec);
+					for(var k = 1; k < 11; k++){
+						code3 = code2+(k < 10 ? '0': '') + k;
+						rec = {id: m++, code: code3, name: getRandomChar() + code3, parentid: id2, levelno: 2};
+						data.push(rec);
+					}
+				}
+			}
+			return data;
+		}
+    </script>
+</head>
+<body onunload="jslet.ui.uninstall()">
+    <h2>Jslet - DBTreeView Demo</h2>
+    <hr />
+	<!-- treeCfg is a global variable defined in Head tag.-->
+    <div id="trvRegion" data-jslet="treeCfg" style="width: 400px; height: 200px;float:left;margin-right: 20px">
+    </div>
+    <div id="tblRegion" data-jslet='type:"DBTable",dataset:"dsAgency",disableHeadSort:true' style="width: 500px; height: 220px;float:left">
+    </div>
+	<div style="float:left">
+		<p>Code: <input type="text" data-jslet="type:'DBText', dataset:'dsAgency',field:'code'" /> &nbsp;&nbsp;&nbsp;
+		Name: <input type="text" data-jslet="type:'DBText', dataset:'dsAgency',field:'name'" />
+		</p>
+		<input type="button" value="Insert" onclick="dsAgency.insertRec()" />
+		<input type="button" value="Delete" onclick="dsAgency.deleteRec()" />
+		<input type="button" value="confirm" onclick="dsAgency.confirm()" />
+	</div>
+    <div style="clear:both" ></div>
+  
+    <hr />
+    <h3>Demo Content:</h3>
+    <p>
+        1. Move cursor in DBTable on right side, you can see the DBTreeView will scroll automatically;</p>
+    <p>
+        2. After check a child node, all of its parent node will display bold, it is very useful to find all checked nodes when the parent nodes are collapsed. </p>
+    <p>
+        3. <input type="checkbox" checked="checked" onclick="treeTag.jslet.hasCheckbox = this.checked; treeTag.jslet.renderAll(); treeTag.jslet.expand();" />Enable checkbox; </p>
+    <p>
+        4. <input type="checkbox" checked=“checked” onclick="treeTag.jslet.relativeCheck = this.checked; treeTag.jslet.renderAll()" />Check all parent nodes and children nodes when check one node,
+        after set this option, try to check node in above treeview.</p>
+    <p>
+        5. Demostrate to expand and collapse: <input type="button" value=" Expand " onclick="treeTag.jslet.expand();" />&nbsp;&nbsp;
+			<input type="button" value=" Collapse " onclick="treeTag.jslet.collapse();" /></p>
+    <p>
+        6. Change display value of node: <input id="value1" value="[name]+'('+[code]+')'" size="27" /><input
+            type="button" value=" Change " onclick="treeTag.jslet.displayFields = $('#value1').val(); treeTag.jslet.renderAll(); treeTag.jslet.expand();" />
+        <input type="button" value=" Restore " onclick="treeTag.jslet.displayFields = $('#value2').val(); treeTag.jslet.renderAll(); treeTag.jslet.expand();" />:<input
+            id="value2" value="[code]+'-'+[name]" size="27" /></p>
+    <p>
+        7. Set dbclick event handler: <input type="button" value=" Set " onclick="treeTag.jslet.onItemDblClick = doDblClick; treeTag.jslet.renderAll()" /><input
+            type="button" value=" Clear " onclick="treeTag.jslet.onItemDblClick = null; treeTag.jslet.renderAll()" /></p>
+    <p>
+        8. Set icon class id of tree node: <input type="button" value=" Set " onclick="treeTag.jslet.onGetIconClass = doGetIconClass; treeTag.jslet.renderAll(); treeTag.jslet.expand();" />
+			<input type="button" value=" Clear " onclick="treeTag.jslet.onGetIconClass = null; treeTag.jslet.renderAll(); treeTag.jslet.expand();" /></p>
+    <p>
+        9. Enable context menu on the tree node, and add customized menu item.</p>
+
+	<!-- Source Code -->
+	<script type="text/javascript" src="../source/demosource.js?height=1200"></script>
+</body>
+</html>

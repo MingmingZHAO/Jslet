@@ -1,0 +1,1 @@
+copy jslet.loader-debug.js jslet.loader.js

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Jslet - SplitPanel Demo</title>
+    <link rel="stylesheet" type="text/css" href="../css/demo-style.css" />
+    <script type="text/javascript" src="../../loader/jslet.loader.js"></script>
+    <script type="text/javascript">
+        jslet.require("jslet");
+    </script>
+
+</head>
+<body onunload="jslet.ui.uninstall()">
+    <h2>Jslet - SplitPanel Demo</h2>
+    <hr />
+	<p>Horizon:</p>
+    <div data-jslet='type:"SplitPanel",direction:"hori",floatIndex: 1'
+        style="width: 600px; height: 100px; margin-left: 20px">
+     	<div style="overflow:hidden; width:100px;min-width:50px">Left Pane</div>
+     	<div style="overflow:hidden; background-color:#ffff99">Float Panel</div>
+     	<div style="overflow:hidden; width:100px">Right Pane</div>
+    </div>
+	<p>Horizon with left panel collapsed:<br />
+		Add css text: "display:none" into the left panel, then collapse it.
+	</p>
+    <div data-jslet='type:"SplitPanel",direction:"hori",floatIndex: 1'
+        style="width: 600px; height: 100px; margin-left: 20px">
+     	<div style="overflow:hidden; width:100px;min-width:50px;display:none">Left Pane</div>
+     	<div style="overflow:hidden; background-color:#ffff99">Float Panel</div>
+     	<div style="overflow:hidden; width:100px">Right Pane</div>
+    </div>
+    <hr />
+    <p>Vertical: </p>
+    <div data-jslet='type:"SplitPanel",direction:"vert",floatIndex: 1'
+        style="width: 600px; height: 300px; margin-left: 20px">
+     	<div style="overflow:hidden; height:100px;min-height:30px">Top Pane1</div>
+     	<div style="overflow:hidden; background-color:#ffff99">Float Pane</div>
+     	<div style="overflow:hidden; height:50px;">Bottom Pane2</div>
+     	<div style="overflow:hidden; height:50px;">Bottom Pane1</div>
+    </div>
+    <hr />
+    <h3>Demo Content:</h3>
+    <p>
+        1. Set direction: horizon or vertical;</p>
+
+    <p>
+        2. Set float pane, which can change width automactically when change other pane's width;</p>
+    <p>
+        3. Click expander button to expand or collapse panel quickly.</p>
+
+	<!-- Source Code -->
+	<script type="text/javascript" src="../source/demosource.js?height=630"></script>
+</body>
+</html>

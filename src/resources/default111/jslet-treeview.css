@@ -1,0 +1,160 @@
+/*
+ * Jslet JavaScript framework, version 2.0 (c) 2012
+ * 
+ * For details, see the Jslet web site: http://www.jslet.com/
+ * 
+ * --------------------------------------------------------------------------
+ */
+	
+/* DBTreeView */
+.jslet-tree
+{
+    border: 1px solid #99BBE8;
+    overflow: hidden;
+    background-color:#FAFAFA;    
+    padding:2px;
+}
+
+.jslet-tree-container{
+	width:100%;
+	height:100%;
+	overflow-x:auto;
+	overflow-y: hidden;
+}
+
+.jslet-tree-nodes{
+	table-layout:fixed;
+	border-collapse:collapse;
+	border-width:0px;
+	height:18px;
+	width:18px;
+}
+
+.jslet-tree-nodes td{
+	border-width:0px;
+	padding:0px;
+	margin:0px;
+	line-height:18px;
+	height:18px;
+	vertical-align:middle;
+}
+
+.jslet-tree-scroll-col{
+	width:18px;
+	vertical-align:top;
+}
+
+.jslet-tree-scrollbar{
+	height:100%;
+	width: 100%;
+	overflow-y:scroll;
+}
+
+.jslet-tree-tracker{
+	width:18px;
+	width:1px;!important
+}
+
+.jslet-tree-lines
+{
+    background-image: url('images/treeview/tree-line.png');
+    background-repeat: no-repeat;
+    width: 18px;
+	height:18px;
+}
+
+.jslet-tree-expander{
+    background-image: url('images/treeview/tree-line.png');
+    background-repeat: no-repeat;
+    width: 18px;
+}
+
+.jslet-tree-icon
+{
+    width: 18px;
+}
+
+.jslet-tree-empty
+{
+    width: 18px;
+}
+
+.jslet-tree-join
+{
+    background-position: 0px 0px;
+}
+
+.jslet-tree-join-bottom
+{
+    background-position: -18px 0px;
+}
+
+.jslet-tree-line
+{
+    background-position: -36px 0px;
+}
+
+.jslet-tree-minus
+{
+    background-position: -54px 0px;
+}
+
+.jslet-tree-minus-bottom
+{
+    background-position: -72px 0px;
+}
+
+.jslet-tree-noline-minus
+{
+    background-position: -90px 0px;
+}
+
+.jslet-tree-noline-plus
+{
+    background-position: -108px 0px;
+}
+
+.jslet-tree-plus
+{
+    background-position: -126px 0px;
+}
+
+.jslet-tree-plus-bottom
+{
+    background-position: -144px 0px;
+}
+
+.jslet-tree-checked
+{
+    background-position: 0px 0px;
+}
+
+.jslet-tree-unchecked
+{
+    background-position: -18px 0px;
+}
+
+.jslet-tree-partialchecked
+{
+    background-position: -36px 0px;
+}
+
+.jslet-tree-checkbox
+{
+    background-image: url('images/treeview/tree-checkbox.png');
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 18px;
+}
+
+.jslet-tree-selected
+{
+    background-color: blue;
+    color: white;
+}
+
+.jslet-tree-child-checked
+{
+    font-weight: bold;
+}
+

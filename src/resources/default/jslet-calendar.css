@@ -1,0 +1,152 @@
+/**
+ * Jslet JavaScript framework, version 2.0 (c) 2013
+ * 
+ * For details, visit web site: http://www.jslet.com/
+ * 
+ */
+
+ @CHARSET "UTF-8";
+
+.jl-calendar
+{
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #8DB2E3;
+    position: relative;
+}
+.jl-cal-header
+{
+    height: 26px;
+    text-align: center;
+    background-color: #233D6D;
+}
+.jl-cal-btn
+{
+    position: absolute;
+    top: 5px;
+    width: 28px;
+    height: auto;
+    color: White;
+    cursor: hand;
+    cursor: pointer;
+}
+.jl-cal-yprev
+{
+    left: 5px;
+}
+
+.jl-cal-mprev
+{
+    left: 35px;
+}
+
+.jl-rtl .jl-cal-yprev
+{
+    left: auto;
+    right: 5px;
+}
+
+.jl-rtl .jl-cal-mprev
+{
+    left: auto;
+    right: 35px;
+}
+ 
+.jl-cal-title
+{
+    text-align: center;
+    position: absolute;
+    top: 5px;
+    color:white;
+    left: 67px;
+    width: 114px;
+}
+
+.jl-cal-mnext
+{
+    right: 35px;
+}
+.jl-cal-ynext
+{
+    right: 5px;
+}     
+
+.jl-rtl .jl-cal-mnext
+{
+    left: 35px;
+    right: auto;
+}
+ 
+.jl-rtl .jl-cal-ynext
+{
+	left:5px;
+    right: auto;
+}     
+
+ 
+.jl-cal-body table tr
+{
+    height: 25px;
+}
+
+.jl-cal-body thead
+{
+    background-color: #B2D1F5;
+}
+
+.jl-cal-body th
+{
+    font-style: normal;
+    font-weight: normal;
+}
+.jl-cal-body a
+{
+    padding-right: 4px;
+    display: block;
+    color: black;
+    text-decoration: none;
+    text-align: right;
+}
+
+.jl-cal-body a:hover
+{
+    background-color: #B2D1F5;
+}
+
+.jl-cal-weekend
+{
+    color: Red;
+}
+.jl-cal-body td
+{
+    width: 30px;
+}
+
+.jl-cal-footer
+{
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+    height: 25px;
+    background-color: #B2D1F5;
+    position: relative;
+}
+.jl-cal-today
+{
+    cursor: hand;
+    cursor: pointer;
+    background-color: ButtonFace;
+    top: 5px;
+    position:relative;
+}
+
+.jl-cal-current
+{
+    font-weight: bold;
+    border: 1px solid #8DB2E3;
+    background-color: #DAE5F3;
+}
+.jl-cal-disable
+{
+    color: #BBBBBB;
+}

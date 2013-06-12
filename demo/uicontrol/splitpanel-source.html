@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<ul><li>Head: </li></ul>
+    <pre class="prettyprint linenums"><code>
+    &lt;script type="text/javascript" src="../../loader/jslet.loader.js">&lt;/script>
+    &lt;script type="text/javascript">
+        jslet.require("jslet");
+    &lt;/script>
+    </code></pre>
+	
+	<ul><li>HTML: </li></ul>
+    <pre class="prettyprint linenums"><code>
+	&lt;!--Horizon -->
+    &lt;div data-jslet='type:"SplitPanel",direction:"hori",floatIndex: 1'
+        style="width: 600px; height: 100px; margin-left: 20px">
+     	&lt;div style="overflow:hidden; width:100px;min-width:50px">Left Pane&lt;/div>
+     	&lt;div style="overflow:hidden; background-color:#ffff99">Float Panel&lt;/div>
+     	&lt;div style="overflow:hidden; width:100px">Right Pane&lt;/div>
+    &lt;/div>
+
+    &lt;!--Vertical -->
+    &lt;div data-jslet='type:"SplitPanel",direction:"vert",floatIndex: 1'
+        style="width: 600px; height: 300px; margin-left: 20px">
+     	&lt;div style="overflow:hidden; height:100px;min-height:30px">Top Pane1&lt;/div>
+     	&lt;div style="overflow:hidden; background-color:#ffff99">Float Pane&lt;/div>
+     	&lt;div style="overflow:hidden; height:50px;">Bottom Pane2&lt;/div>
+     	&lt;div style="overflow:hidden; height:50px;">Bottom Pane1&lt;/div>
+    &lt;/div>
+
+    </code></pre>
+	
+    <script type="text/javascript">
+        window.LOADER_BASE_URL = "../prettify";
+    </script>
+    <script type="text/javascript" src="../prettify/run_prettify.js"></script>
+</body>
+</html>

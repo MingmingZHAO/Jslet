@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<ul><li>Head: </li></ul>
+    <pre class="prettyprint linenums"><code>
+    &lt;script type="text/javascript" src="../../../loader/jslet.loader.js">&lt;/script>
+    &lt;script type="text/javascript">
+        jslet.require("jslet",initialize);
+
+        function initialize() {
+            dsAgency = new jslet.data.Dataset("dsAgency");
+            var f = jslet.data.createNumberField("id", 10);
+            f.label("ID");
+            dsAgency.addField(f);
+
+            f = jslet.data.createNumberField("parentid", 10);
+            f.label("ParentID");
+            dsAgency.addField(f);
+
+            f = jslet.data.createStringField("code", 10);
+            f.label("Code");
+            dsAgency.addField(f);
+
+            f = jslet.data.createStringField("name", 10);
+            f.label("Name");
+            dsAgency.addField(f);
+
+            f = jslet.data.createStringField("iconcls", 10);
+            f.label("Icon Style Class");
+            dsAgency.addField(f);
+
+            dsAgency.keyField("id");
+            dsAgency.codeField("code");
+            dsAgency.nameField("name");
+			dsAgency.levelField("levelno");
+			dsAgency.parentField("parentid");
+
+            dsAgency.dataList(generateLargeData());
+
+			//Add your menu item
+			function doCreateContextMenu(menuItems) {
+				menuItems.push({ name: "-" });
+				menuItems.push({ id: "customMenu", name: "Customized Menu", onclick: function () { alert('Customized Menu clicked!'); } });
+			}
+	
+			//Global variable for #trvRegion 
+            treeCfg = { type: "DBTreeView", 
+			    dataset: "dsAgency", 
+				"displayFields": "[code]+'-'+[name]",
+                "keyField": "id", 
+				"parentField": "parentid",
+                "hasCheckbox": true, 
+				"iconClassField": "iconcls", 
+				onCreateContextMenu: doCreateContextMenu, 
+				relativeCheck: true
+            };
+
+			//Global variable for below event handler
+            treeTag = document.getElementById("trvRegion");
+        }
+	&lt;/script>
+    </code></pre>
+	
+	<ul><li>HTML: </li></ul>
+    <pre class="prettyprint linenums"><code>
+	&lt;!-- treeCfg is a global variable defined in Head tag.-->
+    &lt;div id="trvRegion" data-jslet="treeCfg" style="width: 400px; height: 200px;float:left;margin-right: 20px">
+    </code></pre>
+	
+	<ul><li>Command Script: </li></ul>
+    <pre class="prettyprint linenums"><code>
+//Show checkbox
+treeTag.jslet.hasCheckbox = true;
+
+//Enable relative check
+treeTag.jslet.relativeCheck = true;
+
+//Expand & collapse
+treeTag.jslet.expand();
+treeTag.jslet.collapse();
+
+//Set display content of tree node
+treeTag.jslet.displayFields = "[name]+'('+[code]+')'";
+
+//Set onItemDblClick event of tree node
+function doDblClick() {
+	alert('Double Click Event!');
+}
+treeTag.jslet.onItemDblClick = doDblClick;
+
+//Set doGetIconClass event of tree node
+function doGetIconClass(keyValue, level, isLeaf) {
+	return isLeaf ? "dynset2" : "dynset1";
+}
+treeTag.jslet.onGetIconClass = doGetIconClass;
+
+//Add your menu item
+function doCreateContextMenu(menuItems) {
+	menuItems.push({ name: "-" });
+	menuItems.push({ id: "customMenu", name: "Customized Menu", onclick: function () { alert('Customized Menu clicked!'); } });
+}
+
+treeTag.jslet.onItemDblClick=doDblClick;
+
+    </code></pre>
+	
+	<ul><li><a href='../js/employee-source.html' target="_blank" >Employee.js</a>: </li></ul>
+	
+    <script type="text/javascript">
+        window.LOADER_BASE_URL = "../prettify";
+    </script>
+    <script type="text/javascript" src="../prettify/run_prettify.js"></script>
+</body>
+</html>

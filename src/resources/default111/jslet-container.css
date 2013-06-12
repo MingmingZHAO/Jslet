@@ -1,0 +1,386 @@
+/*
+ * Jslet JavaScript framework, version 2.0 (c) 2012
+ * 
+ * For details, see the Jslet web site: http://www.jslet.com/
+ * 
+ * --------------------------------------------------------------------------
+ */
+.jslet-tabcontrol
+{
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #8DB2E3;
+}
+.jslet-tab-header
+{
+    border: 1px solid #8DB2E3;
+    background: #f9f9f9; /*#E0ECFF;*/
+    border-bottom: 0px;
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    padding-top: 2px;
+    overflow: hidden;
+    width: 100%;
+    margin-right:40px;
+    border-top-width: 0px;
+}
+
+.jslet-tab-container
+{
+    position: relative;
+    left: 0px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    margin-right: 40px;
+    width: 100%;
+}
+.jslet-tab-list
+{
+    list-style-type: none;
+    height: 24px;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 4px;
+    font-size: 12px;
+    width: 5000px;
+    border-bottom: 1px solid #8DB2E3;
+}
+.jslet-tab-list li
+{
+    float: left;
+    display: inline-block;
+    margin: 0px 1px;
+    margin-right: 4px;
+    margin-bottom: -1px;
+    padding: 0;
+    position: relative;
+    border: 1px solid #8DB2E3;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+}
+.jslet-tab-list li a.jslet-tab-inner
+{
+    display: inline-block;
+    text-decoration: none;
+    color: #416AA3;
+    background: url('images/tab/tabs_enabled.png') repeat-x left top;
+    margin: 0px;
+    padding: 0px 10px;
+    height: 23px;
+    line-height: 23px;
+    text-align: center;
+    white-space: nowrap;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+}
+.jslet-tab-list li a.jslet-tab-inner:hover
+{
+    background: url('images/tab/tabs_active.png') repeat-x left bottom;
+}
+.jslet-tab-list li.jslet-tab-selected
+{
+    border: 1px solid #8DB2E3;
+    border-bottom: 1px solid #fff;
+}
+.jslet-tab-list li.jslet-tab-selected a
+{
+    color: #416AA3;
+    /*font-weight: bold;*/
+    background: #fff;
+    background: #7eabcd url('images/tab/tabs_active.png') repeat-x left bottom;
+    outline: none;
+}
+.jslet-tab-list li.jslet-tab-selected a:hover
+{
+    cursor: default;
+    pointer: default;
+}
+.jslet-tab-icon-loc
+{
+    padding-left: 18px;
+}
+.jslet-tab-icon
+{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 10px;
+    top: 4px;
+}
+.jslet-tab-close-loc
+{
+    padding-right: 13px;
+}
+
+.jslet-tab-close
+{
+    position: absolute;
+    font-size: 1px;
+    display: block;
+    padding: 0px;
+    width: 15px;
+    height: 15px;
+    top: 4px;
+    right: 5px;
+}
+
+.jslet-tab-list li a.jslet-tab-close
+{
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    background: url('images/tab/tabs_close.gif') no-repeat 2px 2px;
+}
+.jslet-tab-list li a:hover.jslet-tab-close
+{
+    opacity: 1;
+    filter: alpha(opacity=100);
+    cursor: hand;
+    cursor: pointer;
+    background: url('images/tab/close-focus.png') no-repeat 2px 2px;
+}
+
+.jslet-tab-nav
+{
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    width: 18px;
+    height: 21px !important;
+    height: 23px;
+    border: 1px solid #8DB2E3;
+    font-size: 1px;
+    display: block;
+    cursor: pointer;
+    
+}
+
+.jslet-tab-left
+{
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    width: 18px;
+    height: 21px !important;
+    height: 23px;
+    border: 1px solid #8DB2E3;
+    font-size: 1px;
+    display: block;
+    cursor: pointer;
+
+    right: 22px;
+    background: #E0ECFF url('images/tab/tabs_leftarrow.png') no-repeat 1px 3px;
+}
+
+.jslet-tab-left-disabled
+{
+    background: #E0ECFF url('images/tab/tabs_leftarrow.png') no-repeat -15px 3px;
+}
+
+.jslet-tab-right
+{
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    width: 18px;
+    height: 21px !important;
+    height: 23px;
+    border: 1px solid #8DB2E3;
+    font-size: 1px;
+    display: block;
+    cursor: pointer;
+
+    right: 2px;
+    background: #E0ECFF url('images/tab/tabs_rightarrow.png') no-repeat 2px 3px;
+}
+
+.jslet-tab-right-disabled
+{
+    background: #E0ECFF url('images/tab/tabs_rightarrow.png') no-repeat -14px 3px;
+}
+
+.jslet-tab-items
+{
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #8DB2E3;
+    border-top: 0px;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+.jslet-tab-new
+{
+    font-size: 16pt;
+    font-weight: 900;
+}
+.jslet-tab-panel
+{
+    position: relative;
+    padding: 0px;
+    overflow: auto;
+}
+
+/*************************************/
+
+ .jslet-accordion {
+	border:0px solid #99BCE8;
+}
+
+ .jslet-accordion-head{
+	border:1px solid #B5BCC7;
+	width:100%;
+	cursor:pointer;
+	background-color:#EFEFEF;
+    background-image:url('images/accordion/header-bg.png');
+    background-repeat:repeat-x;
+	height:24px;
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:1px;
+}
+
+.jslet-accordion-head-hover{
+	border:1px solid blue;
+}
+
+.jslet-accordion-body{
+	width:100%;
+	color:#494949;
+	background-color:EFEFEF;
+	border:1px solid #B5BCC7;
+	padding:5px;
+}
+
+
+/*************************************/
+.jslet-fieldset{
+	border: 1px solid #99BBE8;
+	position:relative;
+	padding:10px;
+}
+
+.jslet-fieldset-collapse{
+	border-left:1px transparent dotted;
+	border-right:1px transparent dotted;
+	border-bottom:1px transparent dotted;
+}
+
+.jslet-fieldset-legend{
+	position:relative;
+	left:10px;
+}
+
+.jslet-fieldset-btn{
+	width:16px;
+	height:20px;
+	padding:1px 1px;
+	border:0px;
+	cursor:pointer;
+	text-indent: -16px;
+	
+	background-attachment: scroll;
+	background-clip: border-box;
+	background-color: transparent;
+	background-image: url(images/fieldset/arrows.png);
+	background-origin: padding-box;
+	background-position: -140px 53%;
+	background-repeat: no-repeat;
+}
+
+.jslet-fieldset-btn-up{
+	background-attachment: scroll;
+	background-clip: border-box;
+	background-color: transparent;
+	background-image: url(images/fieldset/arrows.png);
+	background-origin: padding-box;
+	background-position: -35px 53%;
+	background-repeat: no-repeat;
+}
+
+/*Split-Panel */
+.jslet-splitpanel{
+	position:relative;
+	border: 1px solid #99BBE8;
+}
+
+.jslet-sp-panel-hori{
+	height:100%;
+	float:left;
+}
+
+.jslet-sp-panel-vert{
+	width:100%;
+}
+
+.jslet-sp-splitter-tracker{
+	width:4px;
+	height: 4px;
+	position:absolute;
+	z-index:2;
+	display:none;
+	background-color: #b4b4b4;
+}
+
+.jslet-sp-splitter-hori{
+	width:5px;
+	height:100%;
+	background-color:#DFE8F6;
+	cursor:e-resize;
+	float:left;
+	position:relative;
+}
+
+.jslet-sp-splitter-vert{
+	height:5px;
+	width:100%;
+	background-color:#DFE8F6;
+	cursor:s-resize;
+	position:relative;
+}
+
+.jslet-sp-button{
+	position: absolute;
+	cursor: pointer;
+	background-color: transparent;
+	background-repeat: no-repeat !important;
+}
+
+.jslet-sp-button-top{
+	background: no-repeat bottom left;
+	background-image: url('images/splitpanel/mini-top.gif');
+	
+	left: 50%;
+	margin-left: -17px;
+	width: 35px;
+	height: 5px;		
+}
+
+.jslet-sp-button-bottom{
+	background: no-repeat top left;
+	background-image: url('images/splitpanel/mini-bottom.gif');
+}
+
+.jslet-sp-button-left{
+	background: no-repeat top right;
+	background-image: url('images/splitpanel/mini-left.gif');
+
+	top: 50%;
+	margin-top: -17px;
+	width: 5px;
+	height: 35px;	
+}
+
+.jslet-sp-button-right{
+	background: no-repeat top left;
+	background-image: url('images/splitpanel/mini-right.gif');
+}
+
+
+
